@@ -1,17 +1,26 @@
-var fs = require('fs')
+var fs = require('fs'),
+    collections = {}
+
+function ensureCollection(name) {
+    if (!collections[name]) {
+        var initData = fs.readFileSync(__dirname + '/db/' + name + '.json', {
+            encoding: 'utf8'
+        })
+        collections[name] = JSON.parse(initData)
+    }
+    return collections[name]
+}
 
 module.exports = {
     collection: function(name) {
-        var coll = fs.readFileSync(__dirname + '/db/' + name + '.json', {
-            encoding: 'utf8'
-        })
+        var coll = ensureCollection(name)
         return {
             all: function() {
-                return JSON.parse(coll)
+                return coll
             },
             filter: {
                 by: function(property, value) {
-                    return JSON.parse(coll).filter(function(item){
+                    return coll.filter(function(item) {
                         return item[property] === value;
                     });
                 }
