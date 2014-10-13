@@ -1,0 +1,26 @@
+{
+  "name": "simple-cart",
+  "version": "0.0.0",
+  "description": "A simple web shop with a cart.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jouni-kantola/simple-cart.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jouni-kantola/simple-cart/issues"
+  },
+  "homepage": "https://github.com/jouni-kantola/simple-cart",
+  "dependencies": {
+    "koa": "~0.12.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.21.5",
+    "chai": "~1.9.2"
+  }
+}
