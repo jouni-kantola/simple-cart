@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/jouni-kantola/simple-cart",
   "dependencies": {
-    "koa": "~0.12.2"
+    "koa": "~0.12.2",
+    "koa-route": "~2.1.0",
+    "co-body": "~1.0.0"
   },
   "devDependencies": {
     "mocha": "~1.21.5",
