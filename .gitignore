@@ -179,9 +179,8 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Mac crap
+# MacOS generated file
 .DS_Store
-
 
 #############
 ## Python
@@ -214,9 +213,9 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-
 #############
 ## Node.js
 #############
+
 node_modules/
 *.log
