@@ -9,7 +9,7 @@ function ensureCollection(name) {
             encoding: 'utf8'
         })
         parsedData = JSON.parse(initData)
-        collections[name] = parsedData.reduce(function(dictionary, curr, index) {
+        collections[name] = parsedData.reduce(() => (dictionary, curr, index) {
             dictionary[index] = curr
             return dictionary
         }, {})
@@ -35,9 +35,10 @@ module.exports = {
                 }
             },
             add: function(object) {
-                var index = Object.keys(coll).length;
-                coll[index] = object
-                return index
+                var keys = Object.keys(coll)
+                var newIndex = +(keys[keys.length - 1]) + 1
+                coll[newIndex] = object
+                return newIndex
             },
             update: function *(id, properties) {
                 var object = coll[id]
