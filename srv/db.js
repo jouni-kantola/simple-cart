@@ -42,7 +42,7 @@ module.exports = {
             update: function(id, object) {
                 coll[id] = object
             },
-            delete: function(id) {
+            delete: function *(id) {
                 delete coll[id];
             }
         }
