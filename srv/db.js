@@ -39,8 +39,13 @@ module.exports = {
                 coll[index] = object
                 return index
             },
-            update: function(id, object) {
-                coll[id] = object
+            update: function *(id, properties) {
+                var object = coll[id]
+                for (prop in properties) {
+                    if (object.hasOwnProperty(prop)) {
+                        object[prop] = properties[prop]
+                    }
+                }
             },
             delete: function *(id) {
                 delete coll[id];
