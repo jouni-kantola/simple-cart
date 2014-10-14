@@ -9,7 +9,7 @@ function ensureCollection(name) {
             encoding: 'utf8'
         })
         parsedData = JSON.parse(initData)
-        collections[name] = parsedData.reduce(() => (dictionary, curr, index) {
+        collections[name] = parsedData.reduce(function(dictionary, curr, index) {
             dictionary[index] = curr
             return dictionary
         }, {})

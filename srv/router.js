@@ -1,16 +1,14 @@
 var route = require('koa-route'),
     parse = require('co-body'),
-    db = require('./db.js');
+    db = require('./db.js')
 
 module.exports = function(srv) {
     // Register routes
 
-    // GET -> /products
     srv.use(route.get('/:entity', function *(entity) {
         this.body = db.collection(entity).all()
     }))
 
-    // GET -> /products/some-url-friendly-identifier
     srv.use(route.get('/:entity/:id', function *(entity, id) {
         var entity = db.collection(entity).filter.byId(id)
         if (!entity)
@@ -19,7 +17,6 @@ module.exports = function(srv) {
             this.body = entity
     }))
 
-    // POST -> /products
     srv.use(route.post('/:entity', function *(entity) {
         var collection, statusCode, newEntity, index
         try {
@@ -37,7 +34,6 @@ module.exports = function(srv) {
         this.status = statusCode
     }))
 
-    // PUT -> /products/some-url-friendly-identifier
     srv.use(route.put('/:entity/:id', function *(entity, id) {
         var collection, statusCode, properties
         try {
@@ -54,7 +50,6 @@ module.exports = function(srv) {
         this.status = statusCode
     }))
 
-    // DELETE -> /products/some-url-friendly-identifier
     srv.use(route.del('/:entity/:id', function *(entity, id) {
         var collection, statusCode
         try {
@@ -69,4 +64,4 @@ module.exports = function(srv) {
         }
         this.status = statusCode
     }))
-};
+}
