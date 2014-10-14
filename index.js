@@ -1,5 +1,5 @@
 var app = require('koa')(),
-    router = require('./srv/router'),
+    router = require('./server/router'),
     config = require('./config');
 
 router(app);
