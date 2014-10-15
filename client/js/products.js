@@ -1,10 +1,9 @@
-var apiClient = require('./api-client');
-var products = [];
-var current = {};
-
-(function() {
-    list();
-})()
+var apiClient = require('./api-client'),
+    products = [],
+    current = {
+        id: '',
+        name: ''
+    };
 
 function list() {
     apiClient.get('/products').then(function(data) {
@@ -20,9 +19,14 @@ function list() {
     })
 }
 
+(function() {
+    list();
+})()
+
 function one(id, callback) {
     apiClient.get('/products/' + id).then(function(data) {
-        current = data
+        current['name'] = data.name
+        current['id'] = data.id
         callback()
     })
 }
