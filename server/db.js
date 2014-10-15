@@ -40,7 +40,7 @@ module.exports = {
                 coll[newIndex] = object
                 return newIndex
             },
-            update: function *(id, properties) {
+            update: function (id, properties) {
                 var object = coll[id]
                 for (prop in properties) {
                     if (object.hasOwnProperty(prop)) {
@@ -48,7 +48,7 @@ module.exports = {
                     }
                 }
             },
-            delete: function *(id) {
+            delete: function (id) {
                 delete coll[id];
             }
         }
