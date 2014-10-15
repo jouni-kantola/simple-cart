@@ -3,7 +3,7 @@ var products = require('../products');
 var cart = require('../cart');
 
 (function() {
-    
+
     var productList = document.getElementById('products');
     var productDetails = document.getElementById('product-details');
     var cartDetails = document.getElementById('cart');
@@ -17,9 +17,7 @@ var cart = require('../cart');
     })
 
     rivets.bind(cartDetails, {
-        cart: {
-            items: cart.items
-        }
+        cartItems: cart.items
     })
 
     productList.addEventListener('click', function(e) {
@@ -33,12 +31,12 @@ var cart = require('../cart');
     })
 
     productDetails.addEventListener('click', function(e) {
-        console.log(e.target)
         if (e.target.nodeName.toLowerCase() === 'a') {
-            var productId = +(e.target.getAttribute('data-id'))
-            cart.add({ id: productId }, function() {
-                console.log('Cart created. Now go buy!')
-            })
+            var product = {
+                productId: +(e.target.getAttribute('data-id')),
+                quantity: +(document.getElementById('number-to-cart').value)
+            }
+            cart.add(product);
             return false;
         }
     })

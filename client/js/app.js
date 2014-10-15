@@ -6,7 +6,8 @@ require('./views/index');
         preloadData: false
     })
 
-    rivets.formatters.numberAsText = function(value) {
-        return value.toString() || '0'
+    rivets.formatters.length = function(value) {
+        return value.length || 0
     }
+
 })()

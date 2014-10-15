@@ -14,9 +14,9 @@
 <body>
     <header class="header">
         <section id="cart">
-            <span>Cart contains <b><span rv-text="item.length"></span></b> item(s)</span>
-            <ul class="cart-items hide">
-                <li rv-each-item="items">
+            <span>Cart contains <b rv-text="cartItems | length"></b> item(s)</span>
+            <ul class="cart-items">
+                <li rv-each-item="cartItems">
                     <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
                         <span rv-text="item.name"></span>
                     </a>
@@ -39,7 +39,8 @@
             <header>
                 <h1>{ product.name }</h1>
             </header>
-            <a href="#" class="add-to-cart" rv-data-id="product.id">Add to cart</a>
+            <input type="number" min="1" max="9" step="1" value="1" name="number-to-cart" id="number-to-cart">
+            <a href="#" id="add-to-cart" rv-data-id="product.id">Add to cart</a>
         </article>
     </section>
     <footer class="footer">

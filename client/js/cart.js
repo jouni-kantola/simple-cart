@@ -4,20 +4,19 @@ var current = {
     items: []
 };
 
-function add(product, cartId) {
+function add(product) {
     if (current.items.length === 0) {
-        apiClient.post('/carts', {
-            id: 'a-generated-id',
-            rows: []
-        }).then(function(data) {
+        apiClient.post('/carts', {}).then(function(data) {
             current.id = data.id
+            current.items.push(product)
             apiClient.put('/carts/' + current.id, {
-                rows: [product]
+                rows: current.items
             })
         })
     } else {
-        apiClient.put('/carts/' + cartId, {
-            rows: current.items.push(product)
+        current.items.push(product)
+        apiClient.put('/carts/' + current.id, {
+            rows: current.items
         })
     }
 }
