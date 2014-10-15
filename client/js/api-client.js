@@ -43,7 +43,12 @@ function post(url, data) {
     return action(url, 'POST', data);
 }
 
+function put(url, data) {
+    return action(url, 'PUT', data);
+}
+
 module.exports = {
     get: get,
-    post: post
+    post: post,
+    put: put
 }
