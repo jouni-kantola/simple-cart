@@ -1,7 +1,7 @@
 ;
 var Q = require('q')
 
-function createAjaxRequest(url, options) {
+function createAjaxRequest(url, options, data) {
     var deferred = Q.defer()
     var request = new XMLHttpRequest();
     request.open(options.method, url, true);
@@ -14,22 +14,36 @@ function createAjaxRequest(url, options) {
             // We reached our target server, but it returned an error
             deferred.reject(request.status)
         }
-    };
+    }
     request.onerror = function() {
         deferred.reject(request.status)
         // There was a connection error of some sort
-    };
-    request.send()
+    }
+    if (data) {
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.send(JSON.stringify(data))
+    } else {
+        request.send()
+    }
     return deferred.promise
 }
 
-function get(url, callback) {
+function action(url, method, data) {
     var ajaxRequest = createAjaxRequest(url, {
-        method: 'GET'
-    })
+        method: method
+    }, data)
     return Q(ajaxRequest)
 }
 
+function get(url) {
+    return action(url, 'GET');
+}
+
+function post(url, data) {
+    return action(url, 'POST', data);
+}
+
 module.exports = {
-    get: get
+    get: get,
+    post: post
 }

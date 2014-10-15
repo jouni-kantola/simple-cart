@@ -5,4 +5,8 @@ require('./views/index');
     rivets.configure({
         preloadData: false
     })
+
+    rivets.formatters.numberAsText = function(value) {
+        return value.toString() || '0'
+    }
 })()

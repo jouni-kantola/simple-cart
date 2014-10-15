@@ -14,11 +14,11 @@
 <body>
     <header class="header">
         <section id="cart">
-            <span>Cart contains <b id="cart-counter">0</b> item(s)</span>
+            <span>Cart contains <b><span rv-text="item.length"></span></b> item(s)</span>
             <ul class="cart-items hide">
-                <li rv-each-cart-item="cartItem">
-                    <a href="#" rv-data-href="cartItem.href" rv-data-id="cartItem.id" rv-data-uid="cartItem.uid">
-                        <span>{ cartItem.name }</span>
+                <li rv-each-item="items">
+                    <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
+                        <span rv-text="item.name"></span>
                     </a>
                 </li>
             </ul>
@@ -30,7 +30,7 @@
             <ul id="products" class="products unordered">
                 <li rv-each-product="products">
                     <a href="#">
-                        <span rv-data-href="product.href" rv-data-id="product.id" rv-data-uid="product.uid">{ product.name }</span>
+                        <span rv-text="product.name" rv-data-href="product.href" rv-data-id="product.id" rv-data-uid="product.uid"></span>
                     </a>
                 </li>
             </ul>
