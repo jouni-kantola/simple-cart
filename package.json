@@ -33,6 +33,7 @@
     "q": "~1.0.1",
     "vinyl-source-stream": "~1.0.0",
     "vinyl-buffer": "~1.0.0",
-    "rivets": "~0.7.0-rc2"
+    "rivets": "~0.7.0-rc2",
+    "gulp-if": "~1.2.5"
   }
 }

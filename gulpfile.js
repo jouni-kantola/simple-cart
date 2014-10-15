@@ -1,9 +1,11 @@
-var gulp = require('gulp');
-var browserify = require('browserify');
-var uglify = require('gulp-uglify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var version = require('./version');
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    browserify = require('browserify'),
+    uglify = require('gulp-uglify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    version = require('./version'),
+    config = require('./config')
 
 var paths = {
     scripts: ['./client/js/*.js'],
@@ -11,12 +13,12 @@ var paths = {
 }
 
 gulp.task('browserify', function() {
-  return browserify('./client/js/app.js')
-    .bundle()
-    .pipe(source('simple-cart-' + version + '.min.js')) // gives streaming vinyl file object
-    .pipe(buffer()) // convert from streaming to buffered vinyl file object
-    .pipe(uglify()) // gulp-uglify 
-    .pipe(gulp.dest('./client/build'));
+    return browserify('./client/js/app.js')
+        .bundle()
+        .pipe(source('simple-cart-' + version + '.min.js')) // gives streaming vinyl file object
+        .pipe(buffer()) // convert from streaming to buffered vinyl file object
+        .pipe(gulpif(!config.debug, uglify())) // only gulp-uglify if not debug mode
+        .pipe(gulp.dest('./client/build'));
 })
 
 // Define tests
