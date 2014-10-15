@@ -29,6 +29,7 @@ module.exports = function(srv) {
             newEntity = yield parse(this.request)
             index = collection.add(newEntity)
             this.set('Location', '/' + entity + '/' + index)
+            this.body = newEntity
             statusCode = 201
         }
         this.status = statusCode
