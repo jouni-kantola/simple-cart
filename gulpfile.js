@@ -6,8 +6,8 @@ var buffer = require('vinyl-buffer');
 var version = require('./version');
 
 var paths = {
-    scripts: ['src/js/*.js'],
-    tests: 'test/*.js'
+    scripts: ['./client/js/*.js'],
+    tests: './test/*.js'
 }
 
 gulp.task('browserify', function() {
