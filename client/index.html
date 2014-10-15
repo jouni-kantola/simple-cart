@@ -15,10 +15,10 @@
     <header class="header">
         <section id="cart">
             <span>Cart contains <b rv-text="cartItems | length"></b> item(s)</span>
-            <ul class="cart-items">
+            <ul class="cart-items unordered">
                 <li rv-each-item="cartItems">
-                    <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
-                        <span rv-text="item.name"></span>
+                    { item.quantity } of <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
+                        <span>{ item.name }</span>
                     </a>
                 </li>
             </ul>

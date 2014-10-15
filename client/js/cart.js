@@ -10,13 +10,11 @@ function add(product) {
     if (current.rows.length === 0) {
         apiClient.post('/carts', {}).then(function(data) {
             current.id = data.id
-            current.rows.push(product)
             apiClient.put('/carts/' + current.id, {
-                rows: current.rows
+                rows: [product]
             }).then(function() {
                 apiClient.get('/carts/' + current.id).then(function(data) {
-                    current.rows.length = 0
-                    Array.prototype.push.apply(current.rows, data.entity.rows);
+                    current.rows.push.apply(current.rows, data.entity.rows);
                 })
             })
         })
@@ -33,8 +31,7 @@ function add(product) {
         }).then(function() {
             apiClient.get('/carts/' + current.id).then(function(data) {
                 current.rows.length = 0
-                Array.prototype.push.apply(current.rows, data.entity.rows);
-
+                current.rows.push.apply(current.rows, data.entity.rows);
             })
         })
     }
