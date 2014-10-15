@@ -8,7 +8,8 @@ function createAjaxRequest(url, options, data) {
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
             // Success!
-            data = JSON.parse(request.responseText)
+            if (request.status !== 202)
+                data = JSON.parse(request.responseText)
             deferred.resolve(data)
         } else {
             // We reached our target server, but it returned an error
