@@ -1,20 +1,32 @@
-var apiClient = require('./api-client'),
-    items = []
+var apiClient = require('./api-client');
+var current = {
+    id: '',
+    items: []
+};
 
-function create() {
-    apiClient.post('/carts', { id: '1234', rows: [] })
+function add(product, cartId) {
+    if (current.items.length === 0) {
+        apiClient.post('/carts', {
+            id: 'a-generated-id',
+            rows: []
+        }).then(function(data) {
+            current.id = data.id
+            apiClient.put('/carts/' + current.id, {
+                rows: [product]
+            })
+        })
+    } else {
+        apiClient.put('/carts/' + cartId, {
+            rows: current.items.push(product)
+        })
+    }
 }
 
-function add(id, product) {
-    apiClient.put('/carts/' + id)
-}
-
-function all(){
-	apiClient.get('/carts')
+function all() {
+    apiClient.get('/carts')
 }
 
 module.exports = {
-    items: items,
-    create: create,
+    items: current.items,
     add: add
 }

@@ -36,7 +36,7 @@ var cart = require('../cart');
         console.log(e.target)
         if (e.target.nodeName.toLowerCase() === 'a') {
             var productId = +(e.target.getAttribute('data-id'))
-            cart.create(productId, function() {
+            cart.add({ id: productId }, function() {
                 console.log('Cart created. Now go buy!')
             })
             return false;
