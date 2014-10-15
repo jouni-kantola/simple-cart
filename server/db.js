@@ -31,7 +31,7 @@ module.exports = {
                     })
                 },
                 byId: function(id) {
-                    return coll[id]
+                    return { id: id, entity: coll[id] }
                 }
             },
             add: function(object) {
