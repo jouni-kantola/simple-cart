@@ -36,7 +36,7 @@ module.exports = {
             },
             add: function(object) {
                 var keys = Object.keys(coll)
-                var newIndex = +(keys[keys.length - 1]) + 1
+                var newIndex = (+(keys[keys.length - 1]) || 0) + 1
                 coll[newIndex] = object
                 return newIndex
             },
