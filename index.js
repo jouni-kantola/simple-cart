@@ -6,3 +6,6 @@ var app = require('koa')(),
 app.use(serve(__dirname + '/client'))
 router(app)
 app.listen(config.port)
+if (console && console.log) {
+    console.log('Running app; listening at port %s.', config.port);
+}
