@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     config = require('./config')
 
 var paths = {
-    scripts: ['./client/js/*.js'],
+    scripts: ['./client/js/**/*.js'],
     tests: './test/*.js'
 }
 
