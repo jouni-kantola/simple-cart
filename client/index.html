@@ -3,17 +3,47 @@
 
 <head>
     <title>Web shop a la cart</title>
+    <style>
+    	#cart { text-align: right; }
+    	.hide { display: none; }
+    	.unordered { list-style-type: none; padding: 0; }
+    	.keep-tight { margin-bottom: 10px; }
+    </style>
 </head>
 
 <body>
-    <ul id="products" class="products">
-        <li rv-each-product="products">
-            <a href="#" rv-data-href="product.href" rv-data-id="product.id" rv-data-uid="product.uid">
-                <span>{ product.name }</span>
-            </a>
-        </li>
-    </ul>
-
+    <header class="header">
+        <section id="cart">
+            <span>Cart contains <b id="cart-counter">0</b> item(s)</span>
+            <ul class="cart-items hide">
+                <li rv-each-cart-item="cartItem">
+                    <a href="#" rv-data-href="cartItem.href" rv-data-id="cartItem.id" rv-data-uid="cartItem.uid">
+                        <span>{ cartItem.name }</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </header>
+    <section class="content">
+        <nav>
+            <h3 class="keep-tight">Products</h3>
+            <ul id="products" class="products unordered">
+                <li rv-each-product="products">
+                    <a href="#">
+                        <span rv-data-href="product.href" rv-data-id="product.id" rv-data-uid="product.uid">{ product.name }</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <article id="product-details">
+            <header>
+                <h1>{ name }</h1>
+            </header>
+            <a href="#" class="add-to-cart" rv-data-id="id">Add to cart</a>
+        </article>
+    </section>
+    <footer class="footer">
+    </footer>
     <script src="build/simple-cart-0.0.2.min.js"></script>
 </body>
 
