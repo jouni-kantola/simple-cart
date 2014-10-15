@@ -1,5 +1,5 @@
 var uuid = require('node-uuid'),
-    collection = require('./db.js').collection('products')
+    collection = require('./db').collection('products')
 
 function single(id) {
     return collection.filter.byId(id)

@@ -1,6 +1,6 @@
 var route = require('koa-route'),
     parse = require('co-body'),
-    db = require('./db.js')
+    db = require('./db')
 
 function repository(entity) {
     return require('./' + entity)
@@ -32,6 +32,7 @@ module.exports = function(srv) {
     srv.use(route.put('/:entity/:id', function * (entity, id) {
         var properties = yield parse(this.request)
         repository(entity).update(id, properties)
+        this.set('Location', '/' + entity + '/' + id)
         this.status = 202
     }))
 

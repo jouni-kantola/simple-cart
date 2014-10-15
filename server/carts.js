@@ -1,5 +1,5 @@
 var uuid = require('node-uuid'),
-    collection = require('./db.js').collection('carts')
+    collection = require('./db').collection('carts')
 
 function single(id) {
     return collection.filter.byId(id)
@@ -19,8 +19,26 @@ function add() {
     return collection.filter.byId(index)
 }
 
-function update(id, properties) {
-    collection.update(id, properties)
+function update(id, cart) {
+    var products = require('./products')
+    cart.rows = cart.rows.map(function(item) {
+        var product = products.single(item.productId)
+        return {
+            id: product.id,
+            name: product.entity.name,
+            priceIncVat: product.entity.priceIncVat,
+            vatAmount: product.entity.vatAmount,
+            quantity: item.quantity,
+            priceIncVatAmount: (product.entity.priceIncVat * item.quantity)
+        }
+    })
+    cart.totalPriceIncVatAmount = cart.rows.reduce(function(priceIncVat, curr){
+        return priceIncVat + curr.priceIncVatAmount;
+    }, 0);
+    cart.totalVatAmount = cart.rows.reduce(function(vatAmount, curr){
+        return vatAmount + curr.vatAmount;
+    }, 0);
+    collection.update(id, cart)
 }
 
 function del(id) {

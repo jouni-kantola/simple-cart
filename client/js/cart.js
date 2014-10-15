@@ -1,22 +1,43 @@
 var apiClient = require('./api-client');
 var current = {
     id: '',
-    items: []
+    rows: [],
+    totalPriceIncVatAmount: 0,
+    totalVatAmount: 0
 };
 
 function add(product) {
-    if (current.items.length === 0) {
+    if (current.rows.length === 0) {
         apiClient.post('/carts', {}).then(function(data) {
             current.id = data.id
-            current.items.push(product)
+            current.rows.push(product)
             apiClient.put('/carts/' + current.id, {
-                rows: current.items
+                rows: current.rows
+            }).then(function() {
+                apiClient.get('/carts/' + current.id).then(function(data) {
+                    current.rows.length = 0
+                    //current.rows.splice(0, current.rows.length)
+                    Array.prototype.push.apply(current.rows, data.entity.rows);
+                })
             })
         })
     } else {
-        current.items.push(product)
+        var products = current.rows.map(function(item) {
+            return {
+                productId: item.id,
+                quantity: item.quantity
+            }
+        });
+        products.push(product);
         apiClient.put('/carts/' + current.id, {
-            rows: current.items
+            rows: products
+        }).then(function() {
+            apiClient.get('/carts/' + current.id).then(function(data) {
+                current.rows.length = 0
+                //current.rows.splice(0, current.rows.length)
+                Array.prototype.push.apply(current.rows, data.entity.rows);
+
+            })
         })
     }
 }
@@ -26,6 +47,6 @@ function all() {
 }
 
 module.exports = {
-    items: current.items,
+    items: current.rows,
     add: add
 }
