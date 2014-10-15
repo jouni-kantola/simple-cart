@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Simple cart</title>
+    <title>Web shop a la cart</title>
 </head>
+
 <body>
-<script src="build/simple-cart-0.0.1.min.js"></script>
+    <ul id="products" class="products">
+        <li rv-each-product="products">
+            <a href="#" rv-data-href="product.href" rv-data-id="product.id" rv-data-uid="product.uid">
+                <span>{ product.name }</span>
+            </a>
+        </li>
+    </ul>
+
+    <script src="build/simple-cart-0.0.2.min.js"></script>
 </body>
+
 </html>

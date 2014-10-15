@@ -23,13 +23,11 @@ function createAjaxRequest(url, options) {
     return deferred.promise
 }
 
-function get(url) {
+function get(url, callback) {
     var ajaxRequest = createAjaxRequest(url, {
         method: 'GET'
     })
-    Q(ajaxRequest).then(function(data){
-        console.log(data);
-    })
+    return Q(ajaxRequest)
 }
 
 module.exports = {

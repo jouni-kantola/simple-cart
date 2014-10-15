@@ -1,5 +1,8 @@
-var products = require('./products')
+var rivets = require('rivets');
+require('./index');
 
 (function() {
-    console.log(products.all())
+    rivets.configure({
+        preloadData: false
+    })
 })()
