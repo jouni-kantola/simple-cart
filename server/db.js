@@ -10,7 +10,7 @@ function ensureCollection(name) {
         })
         parsedData = JSON.parse(initData)
         collections[name] = parsedData.reduce(function(dictionary, curr, index) {
-            dictionary[index] = curr
+            dictionary[index + 1] = curr
             return dictionary
         }, {})
     }
