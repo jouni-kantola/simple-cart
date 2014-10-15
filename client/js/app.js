@@ -1,5 +1,5 @@
 var rivets = require('rivets');
-require('./index');
+require('./views/index');
 
 (function() {
     rivets.configure({

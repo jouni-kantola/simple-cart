@@ -1,5 +1,5 @@
 var rivets = require('rivets');
-var products = require('./products');
+var products = require('../products');
 
 (function() {
 
