@@ -17,7 +17,7 @@ var cart = require('../cart');
     })
 
     rivets.bind(cartDetails, {
-        cartItems: cart.rows
+        cartItems: cart.items
     })
 
     productList.addEventListener('click', function(e) {

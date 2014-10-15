@@ -16,7 +16,6 @@ function add(product) {
             }).then(function() {
                 apiClient.get('/carts/' + current.id).then(function(data) {
                     current.rows.length = 0
-                    //current.rows.splice(0, current.rows.length)
                     Array.prototype.push.apply(current.rows, data.entity.rows);
                 })
             })
@@ -34,7 +33,6 @@ function add(product) {
         }).then(function() {
             apiClient.get('/carts/' + current.id).then(function(data) {
                 current.rows.length = 0
-                //current.rows.splice(0, current.rows.length)
                 Array.prototype.push.apply(current.rows, data.entity.rows);
 
             })
