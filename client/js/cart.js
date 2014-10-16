@@ -6,17 +6,26 @@ var current = {
     totalVatAmount: 0
 };
 
+function createCart(){
+    return apiClient.post('/carts', {})
+}
+
+function refreshCart() {
+    apiClient.get('/carts/' + current.id).then(function(data) {
+        current.rows.length = 0
+        current.rows.push.apply(current.rows, data.entity.rows)
+        current.totalPriceIncVatAmount = data.entity.totalPriceIncVatAmount
+        current.totalVatAmount = data.entity.totalVatAmount
+    })
+}
+
 function add(product) {
     if (current.rows.length === 0) {
-        apiClient.post('/carts', {}).then(function(data) {
+        createCart().then(function(data) {
             current.id = data.id
             apiClient.put('/carts/' + current.id, {
                 rows: [product]
-            }).then(function() {
-                apiClient.get('/carts/' + current.id).then(function(data) {
-                    current.rows.push.apply(current.rows, data.entity.rows);
-                })
-            })
+            }).then(refreshCart)
         })
     } else {
         var products = current.rows.map(function(item) {
@@ -28,20 +37,11 @@ function add(product) {
         products.push(product);
         apiClient.put('/carts/' + current.id, {
             rows: products
-        }).then(function() {
-            apiClient.get('/carts/' + current.id).then(function(data) {
-                current.rows.length = 0
-                current.rows.push.apply(current.rows, data.entity.rows);
-            })
-        })
+        }).then(refreshCart)
     }
 }
 
-function all() {
-    apiClient.get('/carts')
-}
-
 module.exports = {
-    items: current.rows,
+    cart: current,
     add: add
 }

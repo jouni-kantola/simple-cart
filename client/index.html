@@ -16,13 +16,16 @@
         background: #e0e0e0;
     }
     .content {
-        background: #f3f3f3;
+        background: #f3f3f3; padding: 20px;
+    }
+    .content nav, .content article {
+        display: inline-block;
     }
     #cart {
-        text-align: right;
+        text-align: right; padding: 8px; font-size: small;
     }
     .hide {
-        display: none;
+        display: none !important;
     }
     .unordered {
         list-style-type: none;
@@ -48,15 +51,10 @@
 <body>
     <header class="header">
         <section id="cart">
-            <span>Cart contains <b>{ items | quantity }</b> item(s)</span>
+            <span>Cart contains <b>{ cart.rows | quantity }</b> item(s). Total cost (inc VAT): <b>{ cart.totalPriceIncVatAmount }</b> kr</span>
             <ul class="cart-items unordered">
-                <li rv-each-item="items">
-                    <span class="flash">{ item.quantity } of
-                        <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
-                            <span>{ item.name }</span>
-                        </a>
-                    </span>
-
+                <li rv-each-item="cart.rows">
+                    <aside class="flash">{ item.quantity } pcs of { item.name }</aside>
                 </li>
             </ul>
         </section>
@@ -82,7 +80,7 @@
     </section>
     <footer class="footer">
     </footer>
-    <script src="build/simple-cart-0.0.2.min.js"></script>
+    <script src="build/simple-cart-0.1.0.min.js"></script>
 </body>
 
 </html>

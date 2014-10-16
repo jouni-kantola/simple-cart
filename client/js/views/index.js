@@ -4,12 +4,12 @@ var cart = require('../cart');
 
 (function() {
 
-    var productList = document.getElementById('products');
-    var productDetails = document.getElementById('product-details');
-    var cartDetails = document.getElementById('cart');
+    var productList = document.getElementById('products'),
+        productDetails = document.getElementById('product-details'),
+        cartDetails = document.getElementById('cart');
 
-    rivets.formatters.quantity = function(items){
-        return items.reduce(function(quantity, current){
+    rivets.formatters.quantity = function(items) {
+        return items.reduce(function(quantity, current) {
             return quantity + current.quantity
         }, 0)
     }
