@@ -4,10 +4,33 @@
 <head>
     <title>Web shop a la cart</title>
     <style>
-    	#cart { text-align: right; }
-    	.hide { display: none; }
-    	.unordered { list-style-type: none; padding: 0; }
-    	.keep-tight { margin-bottom: 10px; }
+    * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        font-family: sans-serif
+    }
+    header {
+        background: #e0e0e0;
+    }
+    .content {
+        background: #f3f3f3;
+    }
+    #cart {
+        text-align: right;
+    }
+    .hide {
+        display: none;
+    }
+    .unordered {
+        list-style-type: none;
+        padding: 0;
+    }
+    .keep-tight {
+        margin-bottom: 10px;
+    }
     </style>
 </head>
 
@@ -17,7 +40,8 @@
             <span>Cart contains <b rv-text="cartItems | length"></b> item(s)</span>
             <ul class="cart-items unordered">
                 <li rv-each-item="cartItems">
-                    { item.quantity } of <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
+                    { item.quantity } of
+                    <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
                         <span>{ item.name }</span>
                     </a>
                 </li>
