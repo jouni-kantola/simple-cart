@@ -8,17 +8,19 @@ var cart = require('../cart');
     var productDetails = document.getElementById('product-details');
     var cartDetails = document.getElementById('cart');
 
+    rivets.formatters.quantity = function(items){
+        return items.reduce(function(quantity, current){
+            return quantity + current.quantity
+        }, 0)
+    }
+
     rivets.bind(productList, {
         products: products.all
     })
 
-    rivets.bind(productDetails, {
-        product: products.current
-    })
+    rivets.bind(productDetails, products.current)
 
-    rivets.bind(cartDetails, {
-        cartItems: cart.items
-    })
+    rivets.bind(cartDetails, cart)
 
     productList.addEventListener('click', function(e) {
         if (e.target.nodeName.toLowerCase() === 'span') {
