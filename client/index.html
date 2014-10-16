@@ -10,13 +10,13 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        font-family: sans-serif
+        font-family: sans-serif;
+        color: #313131;
     }
-    header {
-        background: #e0e0e0;
+    body {
+        background: #f3f3f3
     }
     .content {
-        background: #f3f3f3;
         padding: 20px;
     }
     .content nav,
@@ -27,10 +27,17 @@
         background: transparent;
         margin-bottom: 5px;
     }
-    #cart {
+    .header {
         text-align: right;
-        padding: 8px;
+        position: absolute;
+        right: 0;
+    }
+    #cart {
         font-size: small;
+        margin: 15px;
+        background: rgb(247, 227, 0);
+        border-radius: 5px;
+        padding: 8px 13px;
     }
     #product-details {
         padding: 20px 20px;
@@ -40,6 +47,10 @@
         border-radius: 5px;
         font-size: small;
     }
+    #product-details input[type=number] {
+        padding: 2px;
+        font-size: larger;
+    }
     #add-to-cart {
         background: rgb(29, 231, 29);
         padding: 8px 15px;
@@ -47,12 +58,15 @@
         text-decoration: none;
         color: black;
         margin-left: 6px;
+        font-weight: bold;
     }
     #add-to-cart:hover {
         background: rgb(24, 180, 24);
+        color: #acffa5;
     }
-    .the-numbers { margin-bottom: 10px; }
-    .the-numbers span {display: block;}
+    .the-numbers {
+        margin-bottom: 10px;
+    }
     .hide {
         display: none !important;
     }
@@ -104,9 +118,11 @@
                 <h1>{ name }</h1>
             </header>
             <section class="the-numbers">
+                Price (inc VAT):
                 <span class="price">{ priceIncVat } kr</span>
-                <span class="vatAmount">{ vatAmount } kr</span>
-                <span class="vatPercentage">{ vatPercentage } kr</span>
+                <br>VAT:
+                <span class="vatAmount">{ vatAmount }</span>kr (
+                <span class="vatPercentage">{ vatPercentage | percentage }</span>)
             </section>
             <input type="number" min="1" max="9" step="1" value="1" name="number-to-cart" id="number-to-cart">
             <a href="#" id="add-to-cart" rv-data-id="id">Add to cart</a>

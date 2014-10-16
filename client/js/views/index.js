@@ -14,6 +14,10 @@ var cart = require('../cart');
         }, 0)
     }
 
+    rivets.formatters.percentage = function(number) {
+        return (number * 100) + ' %'
+    }
+
     rivets.bind(productList, {
         products: products.all
     })
