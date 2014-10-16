@@ -9,5 +9,4 @@ require('./views/index');
     rivets.formatters.length = function(value) {
         return value.length || 0
     }
-
 })()

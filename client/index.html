@@ -31,6 +31,17 @@
     .keep-tight {
         margin-bottom: 10px;
     }
+    .flash {
+        -webkit-animation: 2s flash;
+    }
+    @-webkit-keyframes flash {
+        from {
+            color: transparent;
+        }
+        to {
+            color: #000;
+        }
+    }
     </style>
 </head>
 
@@ -40,10 +51,12 @@
             <span>Cart contains <b rv-text="cartItems | length"></b> item(s)</span>
             <ul class="cart-items unordered">
                 <li rv-each-item="cartItems">
-                    { item.quantity } of
-                    <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
-                        <span>{ item.name }</span>
-                    </a>
+                    <span class="flash">{ item.quantity } of
+                        <a href="#" rv-data-href="item.href" rv-data-id="item.id" rv-data-uid="item.uid">
+                            <span>{ item.name }</span>
+                        </a>
+                    </span>
+
                 </li>
             </ul>
         </section>
