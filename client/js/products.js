@@ -2,7 +2,10 @@ var apiClient = require('./api-client'),
     products = [],
     current = {
         id: '',
-        name: ''
+        name: '',
+        priceIncVat: 0,
+        vatAmount: 0,
+        vatPercentage: 0
     };
 
 function list() {
@@ -25,8 +28,11 @@ function list() {
 
 function one(id, callback) {
     apiClient.get('/products/' + id).then(function(data) {
-        current['name'] = data.name
-        current['id'] = data.id
+        current.id = data.id
+        current.name = data.entity.name
+        current.priceIncVat = data.entity.priceIncVat
+        current.vatAmount = data.entity.vatAmount
+        current.vatPercentage = data.entity.vatPercentage
         callback()
     })
 }

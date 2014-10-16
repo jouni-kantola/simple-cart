@@ -16,14 +16,43 @@
         background: #e0e0e0;
     }
     .content {
-        background: #f3f3f3; padding: 20px;
+        background: #f3f3f3;
+        padding: 20px;
     }
-    .content nav, .content article {
+    .content nav,
+    .content article {
         display: inline-block;
     }
-    #cart {
-        text-align: right; padding: 8px; font-size: small;
+    .content header {
+        background: transparent;
+        margin-bottom: 5px;
     }
+    #cart {
+        text-align: right;
+        padding: 8px;
+        font-size: small;
+    }
+    #product-details {
+        padding: 20px 20px;
+        vertical-align: top;
+        margin-top: 30px;
+        background: #ddd;
+        border-radius: 5px;
+        font-size: small;
+    }
+    #add-to-cart {
+        background: rgb(29, 231, 29);
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+        margin-left: 6px;
+    }
+    #add-to-cart:hover {
+        background: rgb(24, 180, 24);
+    }
+    .the-numbers { margin-bottom: 10px; }
+    .the-numbers span {display: block;}
     .hide {
         display: none !important;
     }
@@ -74,6 +103,11 @@
             <header>
                 <h1>{ name }</h1>
             </header>
+            <section class="the-numbers">
+                <span class="price">{ priceIncVat } kr</span>
+                <span class="vatAmount">{ vatAmount } kr</span>
+                <span class="vatPercentage">{ vatPercentage } kr</span>
+            </section>
             <input type="number" min="1" max="9" step="1" value="1" name="number-to-cart" id="number-to-cart">
             <a href="#" id="add-to-cart" rv-data-id="id">Add to cart</a>
         </article>
