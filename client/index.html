@@ -34,10 +34,8 @@
             </header>
             <section class="the-numbers">
                 Price (inc VAT):
-                <span class="price">{ priceIncVat } kr</span>
-                <br>VAT:
-                <span class="vatAmount">{ vatAmount }</span>kr (
-                <span class="vatPercentage">{ vatPercentage | percentage }</span>)
+                <span class="price">{ priceIncVat } kr</span><br>
+                VAT: <span class="vatAmount">{ vatAmount }</span> kr (<span class="vatPercentage">{ vatPercentage | percentage }</span>)
             </section>
             <input type="number" min="1" max="9" step="1" value="1" name="number-to-cart" id="number-to-cart">
             <a href="#" id="add-to-cart" rv-data-id="id">Add to cart</a>
@@ -45,7 +43,7 @@
     </section>
     <footer class="footer">
     </footer>
-    <script src="build/simple-cart-0.1.0.min.js"></script>
+    <script src="build/simple-cart-0.1.1.min.js"></script>
 </body>
 
 </html>

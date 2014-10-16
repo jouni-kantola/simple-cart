@@ -1,5 +1,3 @@
-require('mocha')
-
 var db = require('../../server/db'),
     expect = require('chai').expect
 
@@ -54,11 +52,5 @@ describe('db', function() {
             return expect(before).to.be.ok
             	&& expect(after).to.not.be.ok
         })
-
     })
 })
-
-/*
-            
-            delete: function (id) {
-            }*/

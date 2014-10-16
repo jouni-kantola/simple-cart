@@ -1,6 +1,6 @@
-var rivets = require('rivets');
-var products = require('../products');
-var cart = require('../cart');
+var rivets = require('rivets'),
+    products = require('../products'),
+    cart = require('../cart');
 
 (function() {
 

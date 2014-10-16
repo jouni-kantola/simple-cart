@@ -5,16 +5,22 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     minifyCSS = require('gulp-minify-css'),
+    mocha = require('gulp-mocha'),
     version = require('./version'),
     config = require('./config')
 
 var paths = {
-    scripts: ['./client/js/**/*.js'],
-    tests: './test/*.js',
+    scripts: {
+        server: './server/**/*.js',
+        client: './client/js/**/*.js'
+    },
+    tests: {
+        server: './test/server/*.js',
+        client: './test/client/*.js'
+    },
     styles: './client/styles/*.css'
 }
 
-console.log(config.debug)
 gulp.task('browserify', function() {
     return browserify('./client/js/app.js')
         .bundle()
@@ -24,23 +30,40 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./client/build'));
 })
 
-gulp.task('minify-css', function() {
-  gulp.src(paths.styles)
-    .pipe(minifyCSS({keepBreaks: config.debug}))
-    .pipe(gulp.dest('./client/build'))
-});
+gulp.task('styles', function() {
+    gulp.src(paths.styles)
+        .pipe(minifyCSS({
+            keepBreaks: config.debug
+        }))
+        .pipe(gulp.dest('./client/build'))
+})
 
-gulp.task('style')
 
-// Define tests
-gulp.task('tests', function() {})
+gulp.task('server-tests', function() {
+    return gulp.src(paths.tests.server, {
+            read: false
+        })
+        .pipe(mocha({
+            reporter: 'min'
+        }))
+})
+
+gulp.task('client-tests', function() {
+    return gulp.src(paths.tests.client, {
+            read: false
+        })
+        .pipe(mocha({
+            reporter: 'min'
+        }))
+})
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-    gulp.watch(paths.styles, ['minify-css']);
-    gulp.watch(paths.scripts, ['browserify']);
-    gulp.watch(paths.tests, ['tests']);
+    gulp.watch(paths.styles, ['styles']);
+    gulp.watch(paths.scripts.client, ['browserify', 'client-tests']);
+    gulp.watch(paths.tests.client, ['client-tests']);
+    gulp.watch([paths.scripts.server, paths.tests.server], ['server-tests']);
 })
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['browserify', 'minify-css', 'tests', 'watch'])
+gulp.task('default', ['browserify', 'styles', 'server-tests', 'client-tests', 'watch'])
