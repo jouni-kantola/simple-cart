@@ -35,6 +35,7 @@
     "vinyl-source-stream": "~1.0.0",
     "vinyl-buffer": "~1.0.0",
     "rivets": "~0.7.0-rc2",
-    "gulp-if": "~1.2.5"
+    "gulp-if": "~1.2.5",
+    "gulp-minify-css": "~0.3.10"
   }
 }
